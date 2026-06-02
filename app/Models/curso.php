@@ -4,7 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class curso extends Model
+class Curso extends Model
 {
-    //
+    protected $fillable = [
+        'nome',
+        'duracao'
+    ];
 }

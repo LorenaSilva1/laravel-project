@@ -1,20 +1,60 @@
-<h1>Editar Disciplina</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Disciplina</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-<form action="{{ route('disciplinas.update', $disciplina->id) }}" method="POST">
+<body class="bg-light">
 
-    @csrf
-    @method('PUT')
+<div class="container mt-5">
 
-    <input type="text" name="nome" value="{{ $disciplina->nome }}">
+    <h1 class="text-primary mb-4">✏️ Editar Disciplina</h1>
 
-    <br><br>
+    <div class="card shadow">
+        <div class="card-body">
 
-    <input type="number" name="carga_horaria" value="{{ $disciplina->carga_horaria }}">
+            <form action="{{ route('disciplinas.update', $disciplina->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-    <br><br>
+                <div class="mb-3">
+                    <label class="form-label">Nome:</label>
+                    <input
+                        type="text"
+                        name="nome"
+                        value="{{ $disciplina->nome }}"
+                        class="form-control">
+                </div>
 
-    <button type="submit">
-        Atualizar
-    </button>
+                <div class="mb-3">
+                    <label class="form-label">Carga Horária:</label>
+                    <input
+                        type="number"
+                        name="carga_horaria"
+                        value="{{ $disciplina->carga_horaria }}"
+                        class="form-control">
+                </div>
 
-</form>
+                <button type="submit" class="btn btn-primary">
+                    Atualizar
+                </button>
+
+                <a href="{{ route('disciplinas.index') }}"
+                   class="btn btn-secondary">
+                    Voltar
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+
+    <a href="/" class="btn btn-link mt-3">
+        🏠 Menu Principal
+    </a>
+
+</div>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Disciplinas</title>
+    <title>Matrículas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -9,10 +9,10 @@
 
 <div class="container mt-5">
 
-    <h1 class="text-primary mb-4">📝 Lista de Disciplinas</h1>
+    <h1 class="text-primary mb-4">🎓 Lista de Matrículas</h1>
 
-    <a href="{{ route('disciplinas.create') }}" class="btn btn-primary mb-3">
-        + Nova Disciplina
+    <a href="{{ route('matricula.create') }}" class="btn btn-primary mb-3">
+        + Nova Matrícula
     </a>
 
     <div class="card shadow">
@@ -21,27 +21,23 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Carga Horária</th>
+                        <th>Aluno</th>
+                        <th>Disciplina</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach($disciplinas as $disciplina)
+                    @foreach($data as $matricula)
                     <tr>
-                        <td>{{ $disciplina->nome }}</td>
-                        <td>{{ $disciplina->carga_horaria }} horas</td>
+                        <td>{{ $matricula->aluno->nome }}</td>
+                        <td>{{ $matricula->disciplina->nome }}</td>
                         <td>
-                            <a href="{{ route('disciplinas.show', $disciplina->id) }}" class="btn btn-info btn-sm">
-                                Ver
-                            </a>
+                            <a href="{{ route('matricula.show', $matricula->id) }}" class="btn btn-info btn-sm">Ver</a>
 
-                            <a href="{{ route('disciplinas.edit', $disciplina->id) }}" class="btn btn-warning btn-sm">
-                                Editar
-                            </a>
+                            <a href="{{ route('matricula.edit', $matricula->id) }}" class="btn btn-warning btn-sm">Editar</a>
 
-                            <form action="{{ route('disciplinas.destroy', $disciplina->id) }}"
+                            <form action="{{ route('matricula.destroy', $matricula->id) }}"
                                   method="POST"
                                   style="display:inline">
                                 @csrf
@@ -60,7 +56,13 @@
         </div>
     </div>
 
-    <a href="/" class="btn btn-link mt-3">
+    <a href="{{ route('aluno.index') }}" class="btn btn-link mt-3">
+        📚 Gerenciar Alunos
+    </a>
+
+    <br>
+
+    <a href="/" class="btn btn-link">
         🏠 Menu Principal
     </a>
 
