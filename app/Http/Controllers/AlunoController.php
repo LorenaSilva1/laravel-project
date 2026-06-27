@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aluno;
 use App\Models\Curso;
+use App\Services\AlunoService;
 use App\Http\Requests\AlunoRequest;
 
 class AlunoController extends Controller
 {
+    protected $service;
+
+    public function __construct(AlunoService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
-        $data = Aluno::with('curso')->orderBy('nome')->get();
+        $data = $this->service->listar();
         return view('aluno.index', compact('data'));
     }
 
@@ -22,54 +29,37 @@ class AlunoController extends Controller
 
     public function store(AlunoRequest $request)
     {
-        Aluno::create($request->validated());
+        $this->service->salvar($request->validated());
         return redirect()->route('aluno.index');
     }
 
     public function show(string $id)
     {
-        $aluno = Aluno::with('curso')->find($id);
-
-        if ($aluno) {
-            return view('aluno.show', compact('aluno'));
-        }
-
-        return '<h1>Aluno não encontrado!</h1>';
+        $aluno = $this->service->buscar($id);
+        return view('aluno.show', compact('aluno'));
     }
 
     public function edit(string $id)
     {
-        $aluno = Aluno::find($id);
+        $aluno = $this->service->buscar($id);
         $cursos = Curso::orderBy('nome')->get();
 
-        if ($aluno) {
-            return view('aluno.edit', compact('aluno', 'cursos'));
-        }
-
-        return '<h1>Aluno não encontrado!</h1>';
+        return view('aluno.edit', compact('aluno', 'cursos'));
     }
 
     public function update(AlunoRequest $request, string $id)
     {
-        $aluno = Aluno::find($id);
+        $aluno = $this->service->buscar($id);
+        $this->service->atualizar($aluno, $request->validated());
 
-        if ($aluno) {
-            $aluno->update($request->validated());
-            return redirect()->route('aluno.index');
-        }
-
-        return '<h1>Aluno não encontrado!</h1>';
+        return redirect()->route('aluno.index');
     }
 
     public function destroy(string $id)
     {
-        $aluno = Aluno::find($id);
+        $aluno = $this->service->buscar($id);
+        $this->service->excluir($aluno);
 
-        if ($aluno) {
-            $aluno->delete();
-            return redirect()->route('aluno.index');
-        }
-
-        return '<h1>Aluno não encontrado!</h1>';
+        return redirect()->route('aluno.index');
     }
 }
