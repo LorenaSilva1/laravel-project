@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Editar Matrícula</title>
+    <title>Editar Inscrição</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -9,7 +9,7 @@
 
 <div class="container mt-5">
 
-    <h1 class="text-primary mb-4">✏️ Editar Matrícula</h1>
+    <h1 class="text-primary mb-4">✏️ Editar Inscrição</h1>
 
     <div class="card shadow">
         <div class="card-body">
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Disciplina:</label>
+                    <label class="form-label">Modalidade:</label>
                     <select name="disciplina_id" class="form-select">
                         @foreach($disciplinas as $disciplina)
                             <option value="{{ $disciplina->id }}" {{ $matricula->disciplina_id == $disciplina->id ? 'selected' : '' }}>

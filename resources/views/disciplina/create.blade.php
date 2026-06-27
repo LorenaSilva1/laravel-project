@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Nova Disciplina</title>
+    <title>Nova Modalidade</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -9,7 +9,7 @@
 
 <div class="container mt-5">
 
-    <h1 class="text-primary mb-4">📝 Nova Disciplina</h1>
+    <h1 class="text-primary mb-4">💪 Nova Modalidade</h1>
 
     <div class="card shadow">
         <div class="card-body">
@@ -18,12 +18,12 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label class="form-label">Nome:</label>
+                    <label class="form-label">Nome da Modalidade:</label>
                     <input type="text" name="nome" class="form-control">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Carga Horária:</label>
+                    <label class="form-label">Duração:</label>
                     <input type="number" name="carga_horaria" class="form-control">
                 </div>
 

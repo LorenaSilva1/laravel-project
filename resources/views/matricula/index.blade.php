@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Matrículas</title>
+    <title>Inscrições</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -9,10 +9,10 @@
 
 <div class="container mt-5">
 
-    <h1 class="text-primary mb-4">🎓 Lista de Matrículas</h1>
+    <h1 class="text-primary mb-4">📝 Lista de Inscrições</h1>
 
     <a href="{{ route('matricula.create') }}" class="btn btn-primary mb-3">
-        + Nova Matrícula
+        + Nova Inscrição
     </a>
 
     <div class="card shadow">
@@ -22,7 +22,7 @@
                 <thead>
                     <tr>
                         <th>Aluno</th>
-                        <th>Disciplina</th>
+                        <th>Modalidade</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -37,9 +37,7 @@
 
                             <a href="{{ route('matricula.edit', $matricula->id) }}" class="btn btn-warning btn-sm">Editar</a>
 
-                            <form action="{{ route('matricula.destroy', $matricula->id) }}"
-                                  method="POST"
-                                  style="display:inline">
+                            <form action="{{ route('matricula.destroy', $matricula->id) }}" method="POST" style="display:inline">
                                 @csrf
                                 @method('DELETE')
 
@@ -57,7 +55,7 @@
     </div>
 
     <a href="{{ route('aluno.index') }}" class="btn btn-link mt-3">
-        📚 Gerenciar Alunos
+        👤 Gerenciar Alunos
     </a>
 
     <br>

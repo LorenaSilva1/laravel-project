@@ -1,55 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Sistema Escolar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Code</title>
 
     <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
         body{
-            font-family: Arial;
+            background:#f3f4f6;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .container{
             text-align:center;
-            margin-top:100px;
-            background:#f5f5f5;
+        }
+
+        h1{
+            font-size:56px;
+            color:#111827;
+            margin-bottom:15px;
+        }
+
+        p{
+            font-size:22px;
+            color:#555;
+            margin-bottom:40px;
         }
 
         .menu{
-            width:300px;
+            width:360px;
             margin:auto;
         }
 
         .botao{
             display:block;
-            background:#2563eb;
+            width:100%;
+            background:#111827;
             color:white;
             text-decoration:none;
-            padding:15px;
-            margin:15px;
-            border-radius:10px;
-            font-size:18px;
+            padding:18px;
+            margin-bottom:18px;
+            border-radius:12px;
+            font-size:24px;
+            transition:.3s;
         }
 
         .botao:hover{
-            background:#1d4ed8;
+            background:#2563eb;
+            transform:scale(1.03);
         }
     </style>
+
 </head>
 
 <body>
 
-<h1>🎓 Sistema Escolar</h1>
+<div class="container">
 
-<div class="menu">
+    <h1>🏋️ Academia Code</h1>
 
-    <a class="botao" href="/aluno">
-        📚 Alunos
-    </a>
+    <p>Sistema de Gerenciamento de Academia</p>
 
-    <a class="botao" href="/disciplinas">
-        📝 Disciplinas
-    </a>
+    <div class="menu">
 
-    <a class="botao" href="/matricula">
-        🎓 Matrículas
-    </a>
+        <a class="botao" href="/aluno">
+            👤 Alunos
+        </a>
+
+        <a class="botao" href="/disciplinas">
+            💪 Modalidades
+        </a>
+
+        <a class="botao" href="/matricula">
+            📝 Inscrições
+        </a>
+
+    </div>
 
 </div>
 

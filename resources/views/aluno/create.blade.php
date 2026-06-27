@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Novo Aluno</title>
 
     <style>
@@ -33,6 +34,7 @@
             margin-bottom:15px;
             border:1px solid #ccc;
             border-radius:6px;
+            box-sizing:border-box;
         }
 
         .btn{
@@ -44,37 +46,54 @@
             cursor:pointer;
         }
 
+        .btn:hover{
+            background:#1d4ed8;
+        }
+
         .voltar{
             margin-top:20px;
             display:inline-block;
+            text-decoration:none;
+            color:#2563eb;
+            font-weight:bold;
+        }
+
+        .voltar:hover{
+            text-decoration:underline;
         }
     </style>
 </head>
+
 <body>
 
-<h1>📚 Novo Aluno</h1>
+<h1>👤 Novo Aluno</h1>
 
 <div class="card">
-    <form action="{{ route('aluno.store') }}" method="POST">
-        @csrf
 
-        <label>Nome:</label>
-        <input type="text" name="nome">
+<form action="{{ route('aluno.store') }}" method="POST">
+    @csrf
 
-        <label>Turma:</label>
-        <input type="number" name="turma">
+    <label>Nome:</label>
+    <input type="text" name="nome" required>
 
-        <label>Curso:</label>
-        <select name="curso_id">
-            @foreach($cursos as $curso)
-                <option value="{{ $curso->id }}">
-                    {{ $curso->nome }}
-                </option>
-            @endforeach
-        </select>
+    <label>Turma:</label>
+    <input type="number" name="turma" required>
 
-        <button class="btn" type="submit">Salvar</button>
-    </form>
+    <label>Plano:</label>
+    <select name="curso_id">
+        @foreach($cursos as $curso)
+            <option value="{{ $curso->id }}">
+                {{ $curso->nome }}
+            </option>
+        @endforeach
+    </select>
+
+    <button class="btn" type="submit">
+        Salvar
+    </button>
+
+</form>
+
 </div>
 
 <a class="voltar" href="{{ route('aluno.index') }}">
