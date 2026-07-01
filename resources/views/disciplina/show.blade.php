@@ -1,41 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Detalhes da Disciplina</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@extends('layouts.app-academia')
 
-<body class="bg-light">
+@section('title', 'Detalhes da Modalidade')
 
-<div class="container mt-5">
+@section('content')
 
-    <h1 class="text-primary mb-4">📖 Detalhes da Disciplina</h1>
+<h1>📖 Detalhes da Modalidade</h1>
 
-    <div class="card shadow">
-        <div class="card-body">
+<div class="card">
+    <p style="font-size:24px; margin-bottom:15px;">
+        <strong>Modalidade:</strong> {{ $disciplina->nome }}
+    </p>
 
-            <h4><strong>Nome:</strong> {{ $disciplina->nome }}</h4>
+    <p style="font-size:24px; margin-bottom:30px;">
+        <strong>Duração:</strong> {{ $disciplina->duracao }} horas
+    </p>
 
-            <h4><strong>Carga Horária:</strong> {{ $disciplina->carga_horaria }} horas</h4>
-
-            <br>
-
-            <a href="{{ route('disciplinas.edit', $disciplina->id) }}" class="btn btn-warning">
-                Editar
-            </a>
-
-            <a href="{{ route('disciplinas.index') }}" class="btn btn-secondary">
-                Voltar
-            </a>
-
-        </div>
-    </div>
-
-    <a href="/" class="btn btn-link mt-3">
-        🏠 Menu Principal
+    <a href="{{ route('disciplinas.edit', $disciplina->id) }}" class="btn editar">
+        Editar
     </a>
 
+    <a href="{{ route('disciplinas.index') }}" class="btn voltar">
+        Voltar
+    </a>
 </div>
 
-</body>
-</html>
+<div class="links">
+    <a href="/">🏠 Menu Principal</a>
+</div>
+
+@endsection

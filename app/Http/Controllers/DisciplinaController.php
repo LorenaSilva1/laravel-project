@@ -9,9 +9,9 @@ class DisciplinaController extends Controller
 {
     public function index()
     {
-        $disciplinas = Disciplina::all();
+        $data = Disciplina::all();
 
-        return view('disciplina.index', compact('disciplinas'));
+        return view('disciplina.index', compact('data'));
     }
 
     public function create()

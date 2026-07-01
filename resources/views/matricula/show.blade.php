@@ -1,50 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Detalhes da Inscrição</title>
+@extends('layouts.app-academia')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('title', 'Detalhes da Inscrição')
 
-<body class="bg-light">
+@section('content')
 
-<div class="container mt-5">
+<h1>📋 Detalhes da Inscrição</h1>
 
-    <h1 class="text-primary mb-4">📄 Detalhes da Inscrição</h1>
+<div class="card">
 
-    <div class="card shadow">
-        <div class="card-body">
+    <p style="font-size:24px;margin-bottom:15px;">
+        <strong>Aluno:</strong>
+        {{ $matricula->aluno->nome }}
+    </p>
 
-            <h4>
-                <strong>Aluno:</strong>
-                {{ $matricula->aluno->nome }}
-            </h4>
+    <p style="font-size:24px;margin-bottom:30px;">
+        <strong>Modalidade:</strong>
+        {{ $matricula->disciplina->nome }}
+    </p>
 
-            <h4 class="mt-3">
-                <strong>Modalidade:</strong>
-                {{ $matricula->disciplina->nome }}
-            </h4>
+    <a href="{{ route('matricula.edit',$matricula->id) }}" class="btn editar">
+        Editar
+    </a>
 
-            <br>
-
-            <a href="{{ route('matricula.edit',$matricula->id) }}" class="btn btn-warning">
-                Editar
-            </a>
-
-            <a href="{{ route('matricula.index') }}" class="btn btn-secondary">
-                Voltar
-            </a>
-
-        </div>
-    </div>
-
-    <br>
-
-    <a href="/" class="btn btn-dark">
-        🏠 Menu Principal
+    <a href="{{ route('matricula.index') }}" class="btn voltar">
+        Voltar
     </a>
 
 </div>
 
-</body>
-</html>
+<div class="links">
+    <a href="/">🏠 Menu Principal</a>
+</div>
+
+@endsection

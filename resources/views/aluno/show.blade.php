@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Detalhes do Aluno</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@extends('layouts.app-academia')
 
-<body class="bg-light">
+@section('title', 'Detalhes do Aluno')
 
-<div class="container mt-5">
+@section('content')
 
-    <h1 class="text-primary mb-4">📖 Detalhes do Aluno</h1>
+<h1>📖 Detalhes do Aluno</h1>
 
-    <div class="card shadow">
-        <div class="card-body">
+<div class="card">
+    <p style="font-size:24px; margin-bottom:15px;">
+        <strong>Nome:</strong> {{ $aluno->nome }}
+    </p>
 
-            <h4><strong>Nome:</strong> {{ $aluno->nome }}</h4>
-            <h4><strong>Turma:</strong> {{ $aluno->turma }}</h4>
-            <h4><strong>Curso:</strong> {{ $aluno->curso->nome }}</h4>
+    <p style="font-size:24px; margin-bottom:15px;">
+        <strong>Turma:</strong> {{ $aluno->turma }}
+    </p>
 
-            <br>
+    <p style="font-size:24px; margin-bottom:30px;">
+        <strong>Plano:</strong> {{ $aluno->curso->nome }}
+    </p>
 
-            <a href="{{ route('aluno.edit', $aluno->id) }}" class="btn btn-warning">
-                Editar
-            </a>
-
-            <a href="{{ route('aluno.index') }}" class="btn btn-secondary">
-                Voltar
-            </a>
-
-        </div>
-    </div>
-
-    <a href="/" class="btn btn-link mt-3">
-        🏠 Menu Principal
+    <a href="{{ route('aluno.edit', $aluno->id) }}" class="btn editar">
+        Editar
     </a>
 
+    <a href="{{ route('aluno.index') }}" class="btn voltar">
+        Voltar
+    </a>
 </div>
 
-</body>
-</html>
+<div class="links">
+    <a href="/">🏠 Menu Principal</a>
+</div>
+
+@endsection

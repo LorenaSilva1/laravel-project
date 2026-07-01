@@ -1,60 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Editar Disciplina</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@extends('layouts.app-academia')
 
-<body class="bg-light">
+@section('title', 'Editar Modalidade')
 
-<div class="container mt-5">
+@section('content')
 
-    <h1 class="text-primary mb-4">✏️ Editar Disciplina</h1>
+<h1>✏️ Editar Modalidade</h1>
 
-    <div class="card shadow">
-        <div class="card-body">
+<div class="card">
+    <form action="{{ route('disciplinas.update', $disciplina->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-            <form action="{{ route('disciplinas.update', $disciplina->id) }}" method="POST">
-                @csrf
-                @method('PUT')
+        <label>Nome da Modalidade:</label>
+        <input type="text" name="nome" value="{{ $disciplina->nome }}">
 
-                <div class="mb-3">
-                    <label class="form-label">Nome:</label>
-                    <input
-                        type="text"
-                        name="nome"
-                        value="{{ $disciplina->nome }}"
-                        class="form-control">
-                </div>
+        <label>Duração:</label>
+        <input type="number" name="duracao" value="{{ $disciplina->duracao }}">
 
-                <div class="mb-3">
-                    <label class="form-label">Carga Horária:</label>
-                    <input
-                        type="number"
-                        name="carga_horaria"
-                        value="{{ $disciplina->carga_horaria }}"
-                        class="form-control">
-                </div>
+        <button type="submit" class="btn novo">
+            Atualizar
+        </button>
 
-                <button type="submit" class="btn btn-primary">
-                    Atualizar
-                </button>
-
-                <a href="{{ route('disciplinas.index') }}"
-                   class="btn btn-secondary">
-                    Voltar
-                </a>
-
-            </form>
-
-        </div>
-    </div>
-
-    <a href="/" class="btn btn-link mt-3">
-        🏠 Menu Principal
-    </a>
-
+        <a href="{{ route('disciplinas.index') }}" class="btn voltar">
+            Voltar
+        </a>
+    </form>
 </div>
 
-</body>
-</html>
+<div class="links">
+    <a href="/">🏠 Menu Principal</a>
+</div>
+
+@endsection

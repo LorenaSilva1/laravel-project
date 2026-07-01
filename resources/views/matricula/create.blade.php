@@ -1,50 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Nova Inscrição</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@extends('layouts.app-academia')
 
-<body class="bg-light">
+@section('title', 'Nova Inscrição')
 
-<div class="container mt-5">
+@section('content')
 
-    <h1 class="text-primary mb-4">📝 Nova Inscrição</h1>
+<h1>📝 Nova Inscrição</h1>
 
-    <div class="card shadow">
-        <div class="card-body">
+<div class="card">
+    <form action="{{ route('matricula.store') }}" method="POST">
+        @csrf
 
-            <form action="{{ route('matricula.store') }}" method="POST">
-                @csrf
+        <label>Aluno:</label>
 
-                <div class="mb-3">
-                    <label class="form-label">Aluno:</label>
-                    <select name="aluno_id" class="form-select">
-                        @foreach($alunos as $aluno)
-                            <option value="{{ $aluno->id }}">{{ $aluno->nome }}</option>
-                        @endforeach
-                    </select>
-                </div>
+        <select name="aluno_id" required>
+            @foreach($alunos as $aluno)
+                <option value="{{ $aluno->id }}">
+                    {{ $aluno->nome }}
+                </option>
+            @endforeach
+        </select>
 
-                <div class="mb-3">
-                    <label class="form-label">Modalidade:</label>
-                    <select name="disciplina_id" class="form-select">
-                        @foreach($disciplinas as $disciplina)
-                            <option value="{{ $disciplina->id }}">{{ $disciplina->nome }}</option>
-                        @endforeach
-                    </select>
-                </div>
+        <label>Modalidade:</label>
 
-                <button type="submit" class="btn btn-primary">Salvar</button>
-                <a href="{{ route('matricula.index') }}" class="btn btn-secondary">Voltar</a>
-            </form>
+        <select name="disciplina_id" required>
+            @foreach($disciplinas as $disciplina)
+                <option value="{{ $disciplina->id }}">
+                    {{ $disciplina->nome }}
+                </option>
+            @endforeach
+        </select>
 
-        </div>
-    </div>
+        <button class="btn novo">
+            Salvar
+        </button>
 
-    <a href="/" class="btn btn-link mt-3">🏠 Menu Principal</a>
+        <a href="{{ route('matricula.index') }}" class="btn voltar">
+            Voltar
+        </a>
 
+    </form>
 </div>
 
-</body>
-</html>
+<div class="links">
+    <a href="/">🏠 Menu Principal</a>
+</div>
+
+@endsection

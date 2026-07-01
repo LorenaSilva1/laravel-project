@@ -1,55 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Editar Inscrição</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@extends('layouts.app-academia')
 
-<body class="bg-light">
+@section('title', 'Editar Inscrição')
 
-<div class="container mt-5">
+@section('content')
 
-    <h1 class="text-primary mb-4">✏️ Editar Inscrição</h1>
+<h1>✏️ Editar Inscrição</h1>
 
-    <div class="card shadow">
-        <div class="card-body">
+<div class="card">
 
-            <form action="{{ route('matricula.update', $matricula->id) }}" method="POST">
-                @csrf
-                @method('PUT')
+<form action="{{ route('matricula.update',$matricula->id) }}" method="POST">
+    @csrf
+    @method('PUT')
 
-                <div class="mb-3">
-                    <label class="form-label">Aluno:</label>
-                    <select name="aluno_id" class="form-select">
-                        @foreach($alunos as $aluno)
-                            <option value="{{ $aluno->id }}" {{ $matricula->aluno_id == $aluno->id ? 'selected' : '' }}>
-                                {{ $aluno->nome }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+    <label>Aluno:</label>
 
-                <div class="mb-3">
-                    <label class="form-label">Modalidade:</label>
-                    <select name="disciplina_id" class="form-select">
-                        @foreach($disciplinas as $disciplina)
-                            <option value="{{ $disciplina->id }}" {{ $matricula->disciplina_id == $disciplina->id ? 'selected' : '' }}>
-                                {{ $disciplina->nome }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+    <select name="aluno_id">
 
-                <button type="submit" class="btn btn-primary">Atualizar</button>
-                <a href="{{ route('matricula.index') }}" class="btn btn-secondary">Voltar</a>
-            </form>
+        @foreach($alunos as $aluno)
 
-        </div>
-    </div>
+            <option value="{{ $aluno->id }}"
+                {{ $matricula->aluno_id == $aluno->id ? 'selected' : '' }}>
 
-    <a href="/" class="btn btn-link mt-3">🏠 Menu Principal</a>
+                {{ $aluno->nome }}
+
+            </option>
+
+        @endforeach
+
+    </select>
+
+    <label>Modalidade:</label>
+
+    <select name="disciplina_id">
+
+        @foreach($disciplinas as $disciplina)
+
+            <option value="{{ $disciplina->id }}"
+                {{ $matricula->disciplina_id == $disciplina->id ? 'selected' : '' }}>
+
+                {{ $disciplina->nome }}
+
+            </option>
+
+        @endforeach
+
+    </select>
+
+    <button class="btn novo">
+        Atualizar
+    </button>
+
+    <a href="{{ route('matricula.index') }}" class="btn voltar">
+        Voltar
+    </a>
+
+</form>
 
 </div>
 
-</body>
-</html>
+<div class="links">
+    <a href="/">🏠 Menu Principal</a>
+</div>
+
+@endsection

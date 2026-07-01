@@ -1,181 +1,87 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Inscrições</title>
+@extends('layouts.app-academia')
 
-    <style>
-        *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+@section('title', 'Lista de Inscrições')
 
-        body{
-            background:#f3f4f6;
-            min-height:100vh;
-        }
+@section('content')
 
-        .topo{
-            background:linear-gradient(135deg,#0f172a,#1e3a8a);
-            color:white;
-            padding:22px 45px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
+<h1>📝 Lista de Inscrições</h1>
 
-        .logo{
-            font-size:24px;
-            font-weight:bold;
-        }
+<a href="{{ route('matricula.create') }}" class="btn novo">
+    + Nova Inscrição
+</a>
 
-        .usuario{
-            display:flex;
-            gap:15px;
-            align-items:center;
-            font-weight:bold;
-        }
+<div class="card">
 
-        .logout{
-            background:#dc2626;
-            color:white;
-            border:none;
-            padding:10px 16px;
-            border-radius:8px;
-            cursor:pointer;
-        }
+    <table>
 
-        .container{
-            width:85%;
-            margin:45px auto;
-        }
+        <thead>
+            <tr>
+                <th>Aluno</th>
+                <th>Modalidade</th>
+                <th width="280">Ações</th>
+            </tr>
+        </thead>
 
-        h1{
-            color:#1e3a8a;
-            font-size:42px;
-            margin-bottom:25px;
-        }
+        <tbody>
 
-        .btn{
-            padding:10px 15px;
-            border-radius:8px;
-            text-decoration:none;
-            color:white;
-            border:none;
-            cursor:pointer;
-            font-size:15px;
-        }
+        @foreach($data as $matricula)
 
-        .novo{ background:#2563eb; display:inline-block; margin-bottom:25px; }
-        .ver{ background:#06b6d4; }
-        .editar{ background:#f59e0b; }
-        .excluir{ background:#dc2626; }
+            <tr>
 
-        .card{
-            background:white;
-            padding:25px;
-            border-radius:16px;
-            box-shadow:0 10px 25px rgba(0,0,0,.12);
-        }
+                <td>{{ $matricula->aluno->nome }}</td>
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-            font-size:18px;
-        }
+                <td>{{ $matricula->disciplina->nome }}</td>
 
-        th{
-            background:#1e3a8a;
-            color:white;
-            padding:14px;
-            text-align:left;
-        }
+                <td>
 
-        td{
-            padding:14px;
-            border-bottom:1px solid #ddd;
-        }
+                    <a href="{{ route('matricula.show',$matricula->id) }}" class="btn ver">
+                        Ver
+                    </a>
 
-        tr:nth-child(even){
-            background:#f1f5f9;
-        }
+                    <a href="{{ route('matricula.edit',$matricula->id) }}" class="btn editar">
+                        Editar
+                    </a>
 
-        .links{
-            margin-top:25px;
-        }
+                    <form
+                        action="{{ route('matricula.destroy',$matricula->id) }}"
+                        method="POST"
+                        style="display:inline;">
 
-        .links a{
-            display:inline-block;
-            margin-right:15px;
-            color:#1e3a8a;
-            font-weight:bold;
-            text-decoration:none;
-        }
-    </style>
-</head>
+                        @csrf
+                        @method('DELETE')
 
-<body>
+                        <button class="btn excluir">
+                            Excluir
+                        </button>
 
-<div class="topo">
-    <div class="logo">🏋️ Academia Code</div>
+                    </form>
 
-    <div class="usuario">
-        <span>👤 {{ Auth::user()->name }}</span>
+                </td>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button class="logout" type="submit">Sair</button>
-        </form>
-    </div>
+            </tr>
+
+        @endforeach
+
+        </tbody>
+
+    </table>
+
 </div>
 
-<div class="container">
+<div class="links">
 
-    <h1>📝 Lista de Inscrições</h1>
-
-    <a href="{{ route('matricula.create') }}" class="btn novo">
-        + Nova Inscrição
+    <a href="{{ route('aluno.index') }}">
+        👤 Gerenciar Alunos
     </a>
 
-    <div class="card">
-        <table>
-            <thead>
-                <tr>
-                    <th>Aluno</th>
-                    <th>Modalidade</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
+    <a href="{{ route('disciplinas.index') }}">
+        💪 Gerenciar Modalidades
+    </a>
 
-            <tbody>
-                @foreach($data as $matricula)
-                    <tr>
-                        <td>{{ $matricula->aluno->nome }}</td>
-                        <td>{{ $matricula->disciplina->nome }}</td>
-                        <td>
-                            <a href="{{ route('matricula.show', $matricula->id) }}" class="btn ver">Ver</a>
-                            <a href="{{ route('matricula.edit', $matricula->id) }}" class="btn editar">Editar</a>
-
-                            <form action="{{ route('matricula.destroy', $matricula->id) }}"
-                                  method="POST"
-                                  style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn excluir">
-                                    Excluir
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <div class="links">
-        <a href="{{ route('aluno.index') }}">👤 Gerenciar Alunos</a>
-        <a href="/">🏠 Menu Principal</a>
-    </div>
+    <a href="/">
+        🏠 Menu Principal
+    </a>
 
 </div>
 
-</body>
-</html>
+@endsection

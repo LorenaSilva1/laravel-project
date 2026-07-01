@@ -1,112 +1,76 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Modalidades</title>
+@extends('layouts.app-academia')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('title', 'Lista de Modalidades')
 
-    <style>
-        body{
-            background:#f5f5f5;
-        }
+@section('content')
 
-        h1{
-            color:#1e40af;
-            font-weight:bold;
-        }
+<h1>💪 Lista de Modalidades</h1>
 
-        .card{
-            border:none;
-            border-radius:15px;
-            box-shadow:0 0 15px rgba(0,0,0,.1);
-        }
+<a href="{{ route('disciplinas.create') }}" class="btn novo">
+    + Nova Modalidade
+</a>
 
-        .btn{
-            border-radius:8px;
-        }
-    </style>
+<div class="card">
 
-</head>
+    <table>
+        <thead>
+            <tr>
+                <th>Modalidade</th>
+                <th>Duração (meses)</th>
+                <th width="280">Ações</th>
+            </tr>
+        </thead>
 
-<body>
+        <tbody>
+            @foreach($data as $disciplina)
+                <tr>
+                    <td>{{ $disciplina->nome }}</td>
+                    <td>{{ $disciplina->duracao }}</td>
+                    <td>
 
-<div class="container mt-5">
+                        <a href="{{ route('disciplinas.show', $disciplina->id) }}" class="btn ver">
+                            Ver
+                        </a>
 
-    <h1 class="mb-4">💪 Lista de Modalidades</h1>
+                        <a href="{{ route('disciplinas.edit', $disciplina->id) }}" class="btn editar">
+                            Editar
+                        </a>
 
-    <a href="{{ route('disciplinas.create') }}" class="btn btn-primary mb-4">
-        + Nova Modalidade
+                        <form action="{{ route('disciplinas.destroy', $disciplina->id) }}"
+                              method="POST"
+                              style="display:inline;">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button class="btn excluir" type="submit">
+                                Excluir
+                            </button>
+
+                        </form>
+
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+</div>
+
+<div class="links">
+
+    <a href="{{ route('aluno.index') }}">
+        👤 Gerenciar Alunos
     </a>
 
-    <div class="card">
-        <div class="card-body">
+    <a href="{{ route('matricula.index') }}">
+        📝 Gerenciar Inscrições
+    </a>
 
-            <table class="table table-hover align-middle">
-
-                <thead class="table-primary">
-                    <tr>
-                        <th>Modalidade</th>
-                        <th>Duração</th>
-                        <th width="250">Ações</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                @foreach($disciplinas as $disciplina)
-
-                    <tr>
-
-                        <td>{{ $disciplina->nome }}</td>
-
-                        <td>{{ $disciplina->carga_horaria }} horas</td>
-
-                        <td>
-
-                            <a href="{{ route('disciplinas.show',$disciplina->id) }}"
-                               class="btn btn-info btn-sm">
-                               Ver
-                            </a>
-
-                            <a href="{{ route('disciplinas.edit',$disciplina->id) }}"
-                               class="btn btn-warning btn-sm">
-                               Editar
-                            </a>
-
-                            <form action="{{ route('disciplinas.destroy',$disciplina->id) }}"
-                                  method="POST"
-                                  style="display:inline">
-
-                                @csrf
-                                @method('DELETE')
-
-                                <button class="btn btn-danger btn-sm">
-                                    Excluir
-                                </button>
-
-                            </form>
-
-                        </td>
-
-                    </tr>
-
-                @endforeach
-
-                </tbody>
-
-            </table>
-
-        </div>
-    </div>
-
-    <br>
-
-    <a href="/" class="btn btn-secondary">
+    <a href="/">
         🏠 Menu Principal
     </a>
 
 </div>
 
-</body>
-</html>
+@endsection
