@@ -53,8 +53,14 @@ class DisciplinaController extends Controller
     {
         $disciplina = Disciplina::findOrFail($id);
 
+        if ($disciplina->matriculas()->count() > 0) {
+            return redirect()->route('disciplinas.index')
+                ->with('erro', 'Não é possível excluir esta modalidade, pois ela possui inscrições vinculadas.');
+        }
+
         $disciplina->delete();
 
-        return redirect()->route('disciplinas.index');
+        return redirect()->route('disciplinas.index')
+            ->with('sucesso', 'Modalidade excluída com sucesso.');
     }
 }

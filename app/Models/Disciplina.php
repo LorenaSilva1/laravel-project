@@ -10,4 +10,9 @@ class Disciplina extends Model
         'nome',
         'carga_horaria'
     ];
+
+    public function matriculas()
+    {
+        return $this->hasMany(Matricula::class);
+    }
 }

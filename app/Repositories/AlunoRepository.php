@@ -28,6 +28,10 @@ class AlunoRepository
 
     public function delete(Aluno $aluno)
     {
+        if ($aluno->matriculas()->count() > 0) {
+            return false;
+        }
+
         return $aluno->delete();
     }
 }

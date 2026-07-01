@@ -58,8 +58,17 @@ class AlunoController extends Controller
     public function destroy(string $id)
     {
         $aluno = $this->service->buscar($id);
-        $this->service->excluir($aluno);
 
-        return redirect()->route('aluno.index');
+        $excluiu = $this->service->excluir($aluno);
+
+        if (!$excluiu) {
+            return redirect()
+                ->route('aluno.index')
+                ->with('erro', 'Não é possível excluir este aluno, pois ele possui inscrições vinculadas.');
+        }
+
+        return redirect()
+            ->route('aluno.index')
+            ->with('sucesso', 'Aluno excluído com sucesso.');
     }
 }
